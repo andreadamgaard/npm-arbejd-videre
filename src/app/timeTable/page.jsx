@@ -55,9 +55,9 @@ export default function Schedule() {
       <div className={`${krona_one.className} headliner text-center`}>
         <h1>Tidsplan</h1>
       </div>
-      <header className="flex justify-between gap-3 px-2 md:px-4 py-5">
+      <header className="flex justify-between gap-3 px-2 md:grid md:justify-end md:px-4 py-5">
         <div className="flex justify-center mb-4 gap-2 w-full lg:w-auto">
-          <div className="relative w-full lg:hidden">
+          <div className="relative w-full md:hidden">
             <label htmlFor="scene-select" className="sr-only">
               Vælg scene
             </label>
@@ -87,7 +87,7 @@ export default function Schedule() {
             </Listbox>
           </div>
 
-          <div className="hidden lg:flex flex-wrap gap-4">
+          {/* <div className="hidden lg:flex flex-wrap gap-4">
             <button onClick={() => setFilterScene("all")} className={`${filterScene === "all" ? "bg-secondaryColor text-bgColor border-bgColor" : "bg-bgColor text-secondaryColor border-inputFieldColor"} rounded-lg border-2 transition-colors duration-100 ease-in-out hover:bg-secondaryColor hover:text-bgColor hover:border-bgColor px-4 py-1 :ring-2 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-accentColor`} aria-pressed={filterScene === "all"}>
               Alle scener
             </button>
@@ -96,11 +96,11 @@ export default function Schedule() {
                 {scene}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-center mb-4 gap-2 w-full lg:w-auto">
-          <div className="relative w-full lg:hidden">
+          <div className="relative w-full md:hidden">
             <label htmlFor="day-select" className="sr-only">
               Vælg dag
             </label>
@@ -128,7 +128,7 @@ export default function Schedule() {
               </div>
             </Listbox>
           </div>
-          <div className="hidden lg:flex flex-wrap gap-4">
+          <div className="hidden md:flex flex-wrap gap-4">
             {days.map((day) => (
               <button key={day} onClick={() => setFilterDay(day)} className={`${filterDay === day ? "bg-secondaryColor text-bgColor border-bgColor" : "bg-bgColor text-secondaryColor border-inputFieldColor"} rounded-lg border-2 transition-colors duration-100 ease-in-out hover:bg-secondaryColor hover:text-bgColor hover:border-bgColor px-4 py-1 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-accentColor`} aria-pressed={filterDay === day}>
                 {dayNames[day]}

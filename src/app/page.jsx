@@ -1,35 +1,19 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { fetchAPI } from "./api/api";
 import Button from "@/components/globals/Button";
-import CountdownTimer from "@/components/globals/CountdownTimer";
-
+import Countdown from "@/components/frondend/CountdownTimerFunction";
 export default function Home() {
-  // holder styr på om komponenten er monteret
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    //isMounted er true, viser at komponenten er monteret
-    setIsMounted(true);
-  }, []); //tomt array sørger for den kun kører en gang (componentDiMount)
+  
 
   return (
     <div className="min-h-screen">
       <h1 className="hidden">FooFest Forside</h1>
-      <header
-        className="relative text-center py-16 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/image1.png')" }}
-      >
-        <svg
-          className=" h-28 md:h-40"
-          xmlns="http://www.w3.org/2000/svg"
-          width="200"
-          height="74"
-          viewBox="0 0 200 74"
-          fill="none"
-        >
+      <header className="relative text-center py-16">
+        <div className="absolute inset-0 z-0">
+          <Image src="/images/image1.png" alt="Coverbillede" className="object-cover w-full h-full" layout="fill" />
+        </div>
+        <svg className="relative z-10 h-28 md:h-40" xmlns="http://www.w3.org/2000/svg" width="200" height="74" viewBox="0 0 200 74" fill="none">
           <path
             d="M4.33594 6.47266H31.6406V11.9023H10.5273V19.8906H28.457V24.9883H10.5273V37H4.33594V6.47266ZM35.8203 21.6484C35.8203 19.3438 36.2435 17.2344 37.0898 15.3203C37.9362 13.4062 39.1211 11.7656 40.6445 10.3984C42.181 9.01823 44.0169 7.95052 46.1523 7.19531C48.3008 6.4401 50.6771 6.0625 53.2812 6.0625C55.8724 6.0625 58.2422 6.4401 60.3906 7.19531C62.5391 7.95052 64.375 9.01823 65.8984 10.3984C67.4349 11.7656 68.6263 13.4062 69.4727 15.3203C70.319 17.2344 70.7422 19.3438 70.7422 21.6484C70.7422 23.9661 70.319 26.0951 69.4727 28.0352C68.6263 29.9622 67.4349 31.6224 65.8984 33.0156C64.375 34.4089 62.5391 35.4961 60.3906 36.2773C58.2422 37.0456 55.8724 37.4297 53.2812 37.4297C50.6771 37.4297 48.3008 37.0456 46.1523 36.2773C44.0169 35.4961 42.181 34.4089 40.6445 33.0156C39.1211 31.6224 37.9362 29.9622 37.0898 28.0352C36.2435 26.0951 35.8203 23.9661 35.8203 21.6484ZM42.0117 21.6484C42.0117 23.224 42.2917 24.6432 42.8516 25.9062C43.4245 27.1693 44.2122 28.25 45.2148 29.1484C46.2305 30.0339 47.4219 30.7174 48.7891 31.1992C50.1693 31.681 51.6667 31.9219 53.2812 31.9219C54.8958 31.9219 56.3867 31.681 57.7539 31.1992C59.1341 30.7174 60.3255 30.0339 61.3281 29.1484C62.3307 28.25 63.1185 27.1693 63.6914 25.9062C64.2643 24.6432 64.5508 23.224 64.5508 21.6484C64.5508 20.0729 64.2643 18.6602 63.6914 17.4102C63.1185 16.1602 62.3307 15.1055 61.3281 14.2461C60.3255 13.3737 59.1341 12.7096 57.7539 12.2539C56.3867 11.7982 54.8958 11.5703 53.2812 11.5703C51.6667 11.5703 50.1693 11.7982 48.7891 12.2539C47.4219 12.7096 46.2305 13.3737 45.2148 14.2461C44.2122 15.1055 43.4245 16.1602 42.8516 17.4102C42.2917 18.6602 42.0117 20.0729 42.0117 21.6484ZM75.8203 21.6484C75.8203 19.3438 76.2435 17.2344 77.0898 15.3203C77.9362 13.4062 79.1211 11.7656 80.6445 10.3984C82.181 9.01823 84.0169 7.95052 86.1523 7.19531C88.3008 6.4401 90.6771 6.0625 93.2812 6.0625C95.8724 6.0625 98.2422 6.4401 100.391 7.19531C102.539 7.95052 104.375 9.01823 105.898 10.3984C107.435 11.7656 108.626 13.4062 109.473 15.3203C110.319 17.2344 110.742 19.3438 110.742 21.6484C110.742 23.9661 110.319 26.0951 109.473 28.0352C108.626 29.9622 107.435 31.6224 105.898 33.0156C104.375 34.4089 102.539 35.4961 100.391 36.2773C98.2422 37.0456 95.8724 37.4297 93.2812 37.4297C90.6771 37.4297 88.3008 37.0456 86.1523 36.2773C84.0169 35.4961 82.181 34.4089 80.6445 33.0156C79.1211 31.6224 77.9362 29.9622 77.0898 28.0352C76.2435 26.0951 75.8203 23.9661 75.8203 21.6484ZM82.0117 21.6484C82.0117 23.224 82.2917 24.6432 82.8516 25.9062C83.4245 27.1693 84.2122 28.25 85.2148 29.1484C86.2305 30.0339 87.4219 30.7174 88.7891 31.1992C90.1693 31.681 91.6667 31.9219 93.2812 31.9219C94.8958 31.9219 96.3867 31.681 97.7539 31.1992C99.1341 30.7174 100.326 30.0339 101.328 29.1484C102.331 28.25 103.118 27.1693 103.691 25.9062C104.264 24.6432 104.551 23.224 104.551 21.6484C104.551 20.0729 104.264 18.6602 103.691 17.4102C103.118 16.1602 102.331 15.1055 101.328 14.2461C100.326 13.3737 99.1341 12.7096 97.7539 12.2539C96.3867 11.7982 94.8958 11.5703 93.2812 11.5703C91.6667 11.5703 90.1693 11.7982 88.7891 12.2539C87.4219 12.7096 86.2305 13.3737 85.2148 14.2461C84.2122 15.1055 83.4245 16.1602 82.8516 17.4102C82.2917 18.6602 82.0117 20.0729 82.0117 21.6484Z"
             fill="#fff0f5"
@@ -39,75 +23,37 @@ export default function Home() {
             fill="#fff0f5"
           />
         </svg>
-        <div className="mt-8 flex justify-center gap-4 md:gap-6">
-          <Link
-            href="/booking/"
-            className="w-36 md:w-48 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor"
-          >
+        <div className="relative z-10 mt-8 flex justify-center gap-4 md:gap-6">
+          <Link href="/booking/" className="w-36 md:w-48 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor" aria-label="Køb biletter">
             <Button title="Køb billetter" />
           </Link>
-          <Link
-            href="/lineup/"
-            className="w-36 md:w-48 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor"
-          >
+          <Link href="/lineup/" className="w-36 md:w-48 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor" aria-label="Lineup">
             <Button title="Line-up" />
           </Link>
         </div>
       </header>
 
-      <section className="text-center pt-12 pb-8">
-        {/* Render CountdownTimer kun efter komponenten er monteret */}
-        {isMounted && (
-          <CountdownTimer targetDate={new Date("2024-07-01T00:00:00")} />
-        )}
-      </section>
+      <Countdown />
 
       <section className="flex flex-row overflow-x-auto snap-x scroll-px-8 justify-start lg:justify-center items-center space-x-4 md:space-x-8 px-12 lg:px-0 py-5 space-y-0 w-full">
-        <div className="relative snap-always snap-center w-72 h-72 min-w-72 lg:min-w-96 lg:h-96 flex-shrink-0 overflow-hidden">
-          <Image
-            src="/images/image2.png"
-            alt="Bands 1"
-            className="w-full h-full object-cover duration-300 transform hover:scale-105"
-            width={500}
-            height={500}
-          />
-          <Link
-            href="/lineup/"
-            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor"
-          >
+        <Link href="/lineup/" className="relative snap-always snap-center w-72 h-72 min-w-72 lg:min-w-96 lg:h-96 flex-shrink-0 overflow-hidden">
+          <Image src="/images/image2.png" alt="Bands 1" className="w-full h-full object-cover duration-300 transform hover:scale-105" width={500} height={500} />
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor">
             <Button title="Line-up" />
-          </Link>
-        </div>
-        <div className="relative snap-always snap-center w-72 h-72 min-w-72 lg:min-w-96 lg:h-96 flex-shrink-0 overflow-hidden">
-          <Image
-            src="/images/image3.png"
-            alt="Bands 2"
-            className="w-full h-full object-cover duration-300 transform hover:scale-105"
-            width={500}
-            height={500}
-          />
-          <Link
-            href="/booking/"
-            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-accentColor"
-          >
+          </div>
+        </Link>
+        <Link href="/booking/" className="relative snap-always snap-center w-72 h-72 min-w-72 lg:min-w-96 lg:h-96 flex-shrink-0 overflow-hidden">
+          <Image src="/images/image3.png" alt="Bands 2" className="w-full h-full object-cover duration-300 transform hover:scale-105" width={500} height={500} />
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-accentColor">
             <Button title="Billetter" />
-          </Link>
-        </div>
-        <div className="relative snap-always snap-center w-72 h-72 min-w-72 lg:min-w-96 lg:h-96 flex-shrink-0 overflow-hidden">
-          <Image
-            src="/images/image4.png"
-            alt="Bands 3"
-            className="w-full h-full object-cover duration-300 transform hover:scale-105"
-            width={500}
-            height={500}
-          />
-          <Link
-            href="/timeTable/"
-            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 focus: rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor"
-          >
+          </div>
+        </Link>
+        <Link href="/timeTable/" className="relative snap-always snap-center w-72 h-72 min-w-72 lg:min-w-96 lg:h-96 flex-shrink-0 overflow-hidden">
+          <Image src="/images/image4.png" alt="Bands 3" className="w-full h-full object-cover duration-300 transform hover:scale-105" width={500} height={500} />
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor">
             <Button title="Tidsplan" />
-          </Link>
-        </div>
+          </div>
+        </Link>
       </section>
     </div>
   );
