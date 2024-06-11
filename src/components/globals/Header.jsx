@@ -34,7 +34,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/booking/" prefetch={false} className="hover:text-primaryColor transition-colors duration-200 ease-in-out focus: rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor" aria-label="Biletter">
+              <Link href="/tickets/" prefetch={false} className="hover:text-primaryColor transition-colors duration-200 ease-in-out focus: rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor" aria-label="Biletter">
                 Billetter
               </Link>
             </li>
