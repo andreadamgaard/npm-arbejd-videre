@@ -83,6 +83,7 @@ export default function BookingPage() {
         <SummaryPage
           setBookingData={setBookingData}
           bookingData={bookingData}
+          areaImage={bookingData.areaImage}
           onBack={prevStep}
           onNext={nextStep}
         />

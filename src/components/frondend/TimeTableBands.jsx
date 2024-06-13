@@ -14,57 +14,83 @@ export default function TimeTableBands({ lineUp, schedule, filterDay, filterScen
       // Scroll sættes til 0, hver gang filterDay ændres
     }
   }, [filterDay]);
-  // Jeg har sat en key på den div der indeholder vores bands, da det er derunder vores bands er.
-  // Ved at give den en key prop, tvinger vi den til at re-mounte elementen og nulstille scroll
+  // Ved at give en key prop til div'en, tvinger vi den til at re-mounte elementerne og nulstille scroll
+  // Jeg har sat en key på den div der indeholder bands.
 
   // Filter logikken her
   const getBandSchedule = () => {
     let actsDay = [];
 
-    // Hvis scenen står på all
+    // Hvis scenen står på all, henter vi alle acts
     if (filterScene === "all") {
-      // Nyt array = vi går ind og mapper igennem, så vi får fat på alle acts den dag
-      // Det smider vi så i det tomme array
-      Object.entries(schedule).forEach(([sceneName, sceneSchedule]) => {
-        actsDay = actsDay.concat(
-          sceneSchedule[filterDay]?.map((act) => ({
-            ...act,
-            scene: sceneName,
-          })) || []
-        );
-      });
+      // Object.entries = returnerer et array af et objekts egne enumerable par [scener, tider]
+      Object.entries(schedule)
+        // itererer over hver scene og tid
+        .forEach(([sceneName, sceneSchedule]) => {
+          // Concat = merge to arrays med hianden
+          actsDay = actsDay.concat(
+            // Finder alle acts den dag og tilføjer scene navn til dem og putter det i array
+            sceneSchedule[filterDay]?.map((act) => ({
+              // ?. sikre der ikke sker fejl hvis vi prøver at finde en undefined værdi
+              ...act,
+              scene: sceneName,
+            })) ||
+              // Hvis ike der er nogen optrædner bruger vi en tom array
+              []
+          );
+        });
     } else {
-      // Hvis der er valgt en scene viser vi kun acts for den.
+      // Hvis der er valgt en scene viser vi kun acts for den, den specifikke dag.
       actsDay =
+        // Vi filrere hennem filterScene og Day, og h
         schedule[filterScene]?.[filterDay]?.map((act) => ({
-          ...act,
-          scene: filterScene,
+          // Nyt object med acts og scene
+          ...act, // Spræder alle acts
+          scene: filterScene, // vi tilføjer scene værdien
         })) || [];
     }
 
+    //BAND OG ACT ===
+
+    // reducere Lineup til et enkelt objekt
     const bandsMap = lineUp.reduce((map, band) => {
+      // Vi hiver alle bandnavne ud og giver dem band som værdi
       map[band.name] = band;
       return map;
-    }, {});
+    }, {}); // initialiseringsværdi for map.
 
-    return actsDay
-      .map((act) => ({
-        ...act,
-        band: bandsMap[act.act],
-      }))
-      .filter((act) => act.act !== "break");
+    return (
+      actsDay
+        // Vi mapper acts for at tilføje ekstra værdi (Bandsmap)
+        .map((act) => ({
+          // Kopler act navnet, sammen med band navn
+          ...act,
+          band: bandsMap[act.act],
+        }))
+        // Vi beholder kun acts hvor navnet IKKE er "break"
+        .filter((act) => act.act !== "break")
+    );
   };
 
+  // Min filtering tilføjes bandSchedule
   const bandSchedule = getBandSchedule();
 
   // Gruperet efter scene (til ipad + desktop)
+  // Reducer band schedule til ét object
+
+  // acc = "accumulator". Starter som tomt object
+  // opdateres ved hver iteration af reducer funktion
   const groupedByScene = bandSchedule.reduce((acc, act) => {
+    // Tjekker om acc har egenskab for act.scene.
+    // Hvis IKKE, så initialiseres det som en tom array
     if (!acc[act.scene]) {
       acc[act.scene] = [];
     }
+    // Tilføj act til den specifikke scene i vores array
     acc[act.scene].push(act);
+    // Returnerer det opdaterede acc objekt
     return acc;
-  }, {});
+  }, {}); // Initialiseringsværdi for acc.
 
   // Gruperet efter tid (til mobil view)
   const groupedByTime = bandSchedule.reduce((acc, act) => {
@@ -77,17 +103,38 @@ export default function TimeTableBands({ lineUp, schedule, filterDay, filterScen
 
   return (
     <section>
+      {/* Tidsplan i desktop */}
       <article className="hidden md:block">
+        {/* Itererer over groupedByScene objekterne */}
         {Object.keys(groupedByScene).map((scene) => (
           <div key={scene} className="py-6 px-6">
-            <h2 className={`${krona_one.className} scene-size mb-4 text-primaryTextColor`}>{scene}</h2>
+            <h2 className={`${krona_one.className} scene-size mb-4 text-primaryTextColor`}>
+              {/* viser scene navn */}
+              {scene}
+            </h2>
             <div key={filterDay} ref={scrollReset} className="flex gap-8 overflow-x-scroll snap-x">
+              {/* Itererer over acts for den aktuelle scene */}
+              {/* Vi bruger dataen til at sætte det visuelt op herunder */}
               {groupedByScene[scene].map((act) => (
                 <article key={act.act} tabIndex={0} className="relative min-w-fit snap-start overflow-hidden flex flex-col h-72 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor">
-                  <Link href={act.band?.slug || "#"} prefetch={false} className="flex flex-col h-full overflow-hidden group" aria-label={`Link to ${act.act} details`}>
+                  <Link
+                    // Link til bandets side, eller "#" hvis ingen slug
+                    href={act.band?.slug || "#"}
+                    prefetch={false}
+                    className="flex flex-col h-full overflow-hidden group"
+                    aria-label={`Link to ${act.act} details`}
+                  >
                     <figure className="relative h-full w-full transform transition-all">
                       <div className="aspect-square relative w-full h-full">
-                        <Image src={act.band.logo.includes("https") ? act.band.logo : `/logos/${act.band.logo}`} layout="fill" objectFit="cover" loading="lazy" alt={`Logo of ${act.act}`} className="lg:grayscale lg:group-hover:grayscale-0 duration-300 transform lg:group-hover:scale-110" />
+                        <Image
+                          // Hvis billedet indeholder http, hent fra api ELLERS hent lokalt
+                          src={act.band.logo.includes("https") ? act.band.logo : `/logos/${act.band.logo}`}
+                          layout="fill"
+                          objectFit="cover"
+                          loading="lazy"
+                          alt={`Logo of ${act.act}`}
+                          className="lg:grayscale lg:group-hover:grayscale-0 duration-300 transform lg:group-hover:scale-110"
+                        />
                       </div>
                       <figcaption className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-bgColor p-2 to-transparent">
                         <p className={`${krona_one.className} normal-size text-primaryTextColor`}>{act.act}</p>
@@ -107,13 +154,17 @@ export default function TimeTableBands({ lineUp, schedule, filterDay, filterScen
         ))}
       </article>
 
+      {/* Tidsplan i mobil - Listeview */}
       <article className="md:hidden px-6 py-5">
+        {/* Itererer over tiderne i groupedByTime */}
         {Object.keys(groupedByTime).map((time) => (
           <div key={time}>
             <div className="bg-secondaryBgColor py-3 px-3 small-size">
               <p>{time}</p>
             </div>
             <ul className="w-full">
+              {/* Itererer over acts inden for den specifikke tidsramme */}
+              {/* Vi bruger dataen til at sætte det visuelt op herunder */}
               {groupedByTime[time].map((act) => (
                 <li key={`${act.act}-${act.scene}`} tabIndex={0} className="flex justify-between overflow-hidden w-full h-24 border-b border-primaryTextColor last:border-b-0 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-accentColor hover:bg-secondaryBgColor hover:bg-opacity-30 group">
                   <Link href={act.band?.slug || "#"} prefetch={false} className="w-full h-24 overflow-hidden flex items-center xsmall-size pl-2" aria-label={`Link to ${act.act} details`}>

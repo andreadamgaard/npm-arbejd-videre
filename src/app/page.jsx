@@ -2,10 +2,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { fetchAPI } from "./api/api";
+import { krona_one } from "@/app/fonts";
 import Button from "@/components/globals/Button";
 import Countdown from "@/components/frondend/CountdownTimerFunction";
-import CountdownTimer from "@/components/globals/CountdownTimer";
 
 export default function Home() {
   // holder styr på om komponenten er monteret
@@ -64,6 +63,28 @@ export default function Home() {
             <Button title="Tidsplan" />
           </div>
         </Link>
+      </section>
+
+      <section className="py-8">
+        <div>
+          <h1 className={`${krona_one.className} text-center scene-size`}>Billetter til 2024</h1>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+          <div className="flex justify-center lg:justify-end">
+            <Link href="/booking" prefetch={false} className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor block text-center h-48 w-fit" aria-label="Køb billet">
+              <Image src="tickets/TicketRegular.svg" width={100} height={50} alt="Normal billet" className="h-full transform hover:rotate-2 transition-transform duration-300" />
+              <span className="sr-only">FooFest ticket type: Regular billet, price 799 DKK. Indeholder Full festival access og regular camping</span>
+            </Link>
+          </div>
+
+          <div className="flex justify-center lg:justify-start">
+            <Link href="/booking" prefetch={false} className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor block text-center h-48 w-fit" aria-label="Køb billet">
+              <Image src="tickets/TicketVip.svg" width={100} height={50} alt="VIP billet" className="h-full transform hover:-rotate-2 transition-transform duration-300" />
+              <span className="sr-only">FooFest ticket type: VIP billet, price 1299 DKK. Indeholder Full festival access, VIP camping, access to VIP area</span>
+            </Link>
+          </div>
+        </div>
       </section>
     </div>
   );

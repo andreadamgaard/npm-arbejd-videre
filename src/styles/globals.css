@@ -29,8 +29,10 @@
   --heading03: clamp(1.1rem, 1.6vw, 1.2625rem);
   --paragraph-text: clamp(1rem, 1.2vw, 0.9rem);
   --small-text: clamp(0.9rem, 1vw, 0.6rem);
-    --img-text: clamp(1.1rem, 1.9vw, 1.6rem);
+  --img-text: clamp(1.1rem, 1.9vw, 1.6rem);
   --scener-text: clamp(2rem, 6vw, 3rem);
+  --ticket-text: clamp(1.5rem, 2.3vw, 2.3rem);
+  --ticket-top-text: clamp(1.15rem, 2.3vw, 1.12rem);
 
 
   /* line-height */
@@ -99,6 +101,16 @@ nav {
 
 .scene-size {
   font-size: var(--scener-text);
+  line-height: var(--default-line-height);
+}
+
+.ticket-size {
+  font-size: var(--ticket-text);
+  line-height: var(--default-line-height);
+}
+
+.ticket-text-size {
+  font-size: var(--ticket-top-text);
   line-height: var(--default-line-height);
 }
 

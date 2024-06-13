@@ -13,6 +13,10 @@ module.exports = {
       inputFieldColor: "#AFC2C3",
       accentColor: "#FFD700",
       labelColor: "#FF69B4",
+      ticketPink: "#ff7ab5",
+      ticketOrange: "#de903e",
+      ticketPurple: "#987ca3",
+      ticketGreen: "#987ca3",
     },
     extend: {
       backgroundImage: {
