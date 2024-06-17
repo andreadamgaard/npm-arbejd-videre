@@ -14,12 +14,12 @@ export default function TicketPage(){
           </div>
         </div>
         <div className="grid md:grid-cols-2 gap-8 p-8">
-          <Link href="/booking" prefetch={false} className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 transition-transform duration-300" aria-label="Køb billet">
+          <Link href="/booking" prefetch={false} className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 hover:scale-105 transition-transform duration-300" aria-label="Køb billet">
             <Image src="tickets/TicketRegular.svg" width={100} height={50} alt="Normal billet" clas />
             <span class="sr-only">FooFest ticket type: Regular billet, price 799 DKK. Indeholder Full festival access og regular camping</span>
           </Link>
 
-          <Link href="/booking" prefetch={false} className="focus: rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 transition-transform duration-300" aria-label="Køb billet">
+          <Link href="/booking" prefetch={false} className="focus: rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 hover:scale-105 transition-transform duration-300" aria-label="Køb billet">
             <Image src="tickets/TicketVip.svg" width={100} height={50} alt="VIP billet" />
             <span class="sr-only">FooFest ticket type: VIP billet, price 1299 DKK. Indeholder Full festival access, VIP camping, access to VIP area</span>
           </Link>
@@ -33,32 +33,32 @@ export default function TicketPage(){
           </div>
         </div>
         <div className=" grid grid-cols-2 lg:grid-cols-3 gap-5 p-8">
-          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 transition-transform duration-300">
+          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 hover:scale-105 transition-transform duration-300">
             <Image src="tickets/TicketHelheim.svg" width={100} height={50} alt="Helheim Camping" className="w-full" />
             <span class="sr-only">FooFest camping område: Helheim</span>
           </div>
 
-          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 transition-transform duration-300">
+          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 hover:scale-105 transition-transform duration-300">
             <Image src="tickets/TicketMuspelheim.svg" width={100} height={50} alt="Muspelheim Camping" className="w-full" />
             <span class="sr-only">FooFest camping område: Muspelheim</span>
           </div>
 
-          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 transition-transform duration-300">
+          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 hover:scale-105 transition-transform duration-300">
             <Image src="tickets/TicketNilfheim.svg" width={100} height={50} alt="Nilfheim Camping" className="w-full" />
             <span class="sr-only">FooFest camping område: Nilfheim</span>
           </div>
 
-          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 transition-transform duration-300">
+          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 hover:scale-105 transition-transform duration-300">
             <Image src="tickets/TicketAlfheim.svg" width={100} height={50} alt="Alfheim Camping" className="w-full" />
             <span class="sr-only">FooFest camping område: Alfheim</span>
           </div>
 
-          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 transition-transform duration-300">
+          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:-rotate-2 hover:scale-105 transition-transform duration-300">
             <Image src="tickets/TicketSvartheim.svg" width={100} height={50} alt="Svartheim Camping" className="w-full" />
             <span class="sr-only">FooFest camping område: Svartheim</span>
           </div>
 
-          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 transition-transform duration-300">
+          <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 hover:scale-105 transition-transform duration-300">
             <Image src="tickets/TicketGreen.svg" width={100} height={50} alt="Grøn Camping" className="w-full" />
             <span class="sr-only">FooFest camping område: Grøn Camping. Pris: 249 DKK. Indeholder Clean camping area og stilhed fra 22-09.</span>
           </div>

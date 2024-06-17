@@ -91,7 +91,7 @@ export default function TimeTableBands({ lineUp, schedule, filterDay, filterScen
     acc[act.scene].push(act);
     // Returnerer det opdaterede acc objekt
     return acc;
-  }, {}); // Initialiseringsværdi for acc.
+  }, {}); 
 
   // Gruperet efter tid (til mobil view)
   const groupedByTime = bandSchedule.reduce((acc, act) => {
@@ -152,7 +152,7 @@ export default function TimeTableBands({ lineUp, schedule, filterDay, filterScen
                   </article>
                 ))}
               </div>
-              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 h-12 pointer-events-none">
+              <div className="absolute top-1/2 right-0  -translate-y-1/2 h-12 pointer-events-none">
                 <ChevronRightIcon className="h-12 w-12 text-current" />
               </div>
             </div>
