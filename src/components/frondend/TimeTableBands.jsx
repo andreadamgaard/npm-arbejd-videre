@@ -2,20 +2,21 @@ import Image from "next/image.js";
 import Link from "next/link.js";
 import { krona_one } from "@/app/fonts";
 import React, { useEffect, useRef } from "react";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
+
 
 export default function TimeTableBands({ lineUp, schedule, filterDay, filterScene }) {
   // Scroll containeren skal nulstilles når man vælger ny dag:
   const scrollReset = useRef(null);
 
-  // Vi resetter vores scroll når dagen ændres
   useEffect(() => {
     if (scrollReset.current) {
       scrollReset.current.scrollLeft = 0;
       // Scroll sættes til 0, hver gang filterDay ændres
     }
   }, [filterDay]);
-  // Ved at give en key prop til div'en, tvinger vi den til at re-mounte elementerne og nulstille scroll
-  // Jeg har sat en key på den div der indeholder bands.
+  // Ved at bruge en ref prop på div'en, får vi adgang til DOM-elementet og kan nulstille scroll
+  // Jeg har sat en ref på band div for at kunne nulstille scroll-positionen, når filterDay ændres.
 
   // Filter logikken her
   const getBandSchedule = () => {
@@ -104,55 +105,60 @@ export default function TimeTableBands({ lineUp, schedule, filterDay, filterScen
   return (
     <section>
       {/* Tidsplan i desktop */}
-      <article className="hidden md:block">
+      <div className="hidden md:block">
         {/* Itererer over groupedByScene objekterne */}
         {Object.keys(groupedByScene).map((scene) => (
-          <div key={scene} className="py-6 px-6">
+          <div key={scene} className="py-6 px-6 relative">
             <h2 className={`${krona_one.className} scene-size mb-4 text-primaryTextColor`}>
               {/* viser scene navn */}
               {scene}
             </h2>
-            <div key={filterDay} ref={scrollReset} className="flex gap-8 overflow-x-scroll snap-x">
-              {/* Itererer over acts for den aktuelle scene */}
-              {/* Vi bruger dataen til at sætte det visuelt op herunder */}
-              {groupedByScene[scene].map((act) => (
-                <article key={act.act} tabIndex={0} className="relative min-w-fit snap-start overflow-hidden flex flex-col h-72 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor">
-                  <Link
-                    // Link til bandets side, eller "#" hvis ingen slug
-                    href={act.band?.slug || "#"}
-                    prefetch={false}
-                    className="flex flex-col h-full overflow-hidden group"
-                    aria-label={`Link to ${act.act} details`}
-                  >
-                    <figure className="relative h-full w-full transform transition-all">
-                      <div className="aspect-square relative w-full h-full">
-                        <Image
-                          // Hvis billedet indeholder http, hent fra api ELLERS hent lokalt
-                          src={act.band.logo.includes("https") ? act.band.logo : `/logos/${act.band.logo}`}
-                          layout="fill"
-                          objectFit="cover"
-                          loading="lazy"
-                          alt={`Logo of ${act.act}`}
-                          className="lg:grayscale lg:group-hover:grayscale-0 duration-300 transform lg:group-hover:scale-110"
-                        />
-                      </div>
-                      <figcaption className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-bgColor p-2 to-transparent">
-                        <p className={`${krona_one.className} normal-size text-primaryTextColor`}>{act.act}</p>
-                        <div className="flex gap-4 items-center">
-                          <p className="normal-size">
-                            {act.start} - {act.end}
-                          </p>
-                          <p>{filterDay}</p>
+            <div className="relative">
+              <div key={filterDay} ref={scrollReset} className="flex gap-8 overflow-x-scroll snap-x">
+                {/* Itererer over acts for den aktuelle scene */}
+                {/* Vi bruger dataen til at sætte det visuelt op herunder */}
+                {groupedByScene[scene].map((act) => (
+                  <article key={act.act} tabIndex={0} className="relative min-w-fit snap-start overflow-hidden flex flex-col h-72 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor">
+                    <Link
+                      // Link til bandets side, eller "#" hvis ingen slug
+                      href={act.band?.slug || "#"}
+                      prefetch={false}
+                      className="flex flex-col h-full overflow-hidden group"
+                      aria-label={`Link to ${act.act} details`}
+                    >
+                      <figure className="relative h-full w-full transform transition-all">
+                        <div className="aspect-square relative w-full h-full">
+                          <Image
+                            // Hvis billedet indeholder http, hent fra api ELLERS hent lokalt
+                            src={act.band.logo.includes("https") ? act.band.logo : `/logos/${act.band.logo}`}
+                            layout="fill"
+                            objectFit="cover"
+                            loading="lazy"
+                            alt={`Logo of ${act.act}`}
+                            className="lg:grayscale lg:group-hover:grayscale-0 duration-300 transform lg:group-hover:scale-110"
+                          />
                         </div>
-                      </figcaption>
-                    </figure>
-                  </Link>
-                </article>
-              ))}
+                        <figcaption className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-bgColor p-2 to-transparent">
+                          <p className={`${krona_one.className} normal-size text-primaryTextColor`}>{act.act}</p>
+                          <div className="flex gap-4 items-center">
+                            <p className="normal-size">
+                              {act.start} - {act.end}
+                            </p>
+                            <p>{filterDay}</p>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 h-12 pointer-events-none">
+                <ChevronRightIcon className="h-12 w-12 text-current" />
+              </div>
             </div>
           </div>
         ))}
-      </article>
+      </div>
 
       {/* Tidsplan i mobil - Listeview */}
       <article className="md:hidden px-6 py-5">

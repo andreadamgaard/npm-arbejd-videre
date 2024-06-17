@@ -45,12 +45,37 @@ export default function LineupBands({
     <div className={`grid grid-cols-2 px-6 py-5 sm:grid-cols-3 lg:grid-cols-4 gap-4 ${krona_one.className}`}>
       {/* Vi mapper gennem vores filtrerede bands, så den laver en article for hvert band med info */}
       {filteredLineUp.map((band) => (
-        <article key={band.name} tabIndex={0} className="relative overflow-hidden flex flex-col h-48 md:h-72 w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor">
-          <Link href={band.slug} prefetch={false} className="flex flex-col h-full overflow-hidden group" aria-label={`Link to ${band.name} details`}>
+        <article 
+          key={band.name} 
+          tabIndex={0} 
+          className="relative overflow-hidden flex flex-col h-48 md:h-72 w-full 
+          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor"
+        >
+          <Link 
+            href={band.slug} 
+            prefetch={false} 
+            className="flex flex-col h-full overflow-hidden group" 
+            aria-label={`Link to ${band.name} details`}
+          >
             <figure className="relative w-full h-full transform transition">
-              <Image src={band.logo.includes("https") ? band.logo : `/logos/${band.logo}`} fill loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" alt={`Logo of ${band.name}`} className="absolute grayscale group-hover:grayscale-0 inset-0 w-full h-full object-cover duration-300 transform group-hover:scale-110" />
-              <figcaption className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-bgColor p-2 to-transparent">
-                <p className=" text-primaryTextColor img-text-size text-center">{band.name}</p>
+              <Image 
+              src={
+                band.logo.includes("https") 
+                ? band.logo 
+                : `/logos/${band.logo}`
+              } 
+              fill 
+              loading="lazy" 
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" 
+              alt={`Logo of ${band.name}`} 
+              className="absolute grayscale group-hover:grayscale-0 inset-0 w-full h-full 
+              object-cover duration-300 transform group-hover:scale-110" />
+              <figcaption 
+              className="absolute inset-0 flex items-end justify-center bg-gradient-to-t 
+              from-bgColor p-2 to-transparent">
+                <p className=" text-primaryTextColor img-text-size text-center">
+                  {band.name}
+                </p>
               </figcaption>
             </figure>
           </Link>
