@@ -59,7 +59,7 @@ export default function TicketPage(){
           </div>
 
           <div className="focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentColor transform hover:rotate-2 transition-transform duration-300">
-            <Image src="tickets/Ticketgreen.svg" width={100} height={50} alt="Grøn Camping" className="w-full" />
+            <Image src="tickets/TicketGreen.svg" width={100} height={50} alt="Grøn Camping" className="w-full" />
             <span class="sr-only">FooFest camping område: Grøn Camping. Pris: 249 DKK. Indeholder Clean camping area og stilhed fra 22-09.</span>
           </div>
         </div>
